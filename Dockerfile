@@ -1,6 +1,6 @@
 FROM i386/ubuntu:bionic
 
-RUN echo 'Acquire::http::Proxy "http://10.0.0.10:3142";' > /etc/apt/apt.conf.d/00aptproxy
+# RUN echo 'Acquire::http::Proxy "http://10.0.0.10:3142";' > /etc/apt/apt.conf.d/00aptproxy
 
 ENV LC_ALL C.UTF-8
 ENV LANG en_US.UTF-8
