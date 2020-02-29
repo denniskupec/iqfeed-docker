@@ -4,13 +4,20 @@ A dockerized IQFeed client running on Wine. This version is headless and does no
 
 Usage  
 -----
+Clone this repository and build the image:
+```
+git clone https://github.com/denniskupec/iqfeed-docker.git
+cd iqfeed-docker
+docker build . -t iqfeed-docker
+```
+Then run it:
 ```
 docker run -d \
     -e IQFEED_LOGIN=?????? \
     -e IQFEED_PASSWORD=?????? \
     -p 5009:5009 -p 5901:5901 -p 9100:9100 -p 9300:9300 \
     -v /var/log/iqfeed:/home/wine/DTN/IQFeed \
-    denniskupec/iqfeed
+    iqfeed-docker
 ```
 
 The client is set to log only errors by default.
