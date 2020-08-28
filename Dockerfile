@@ -42,7 +42,10 @@ RUN su -pl wine -c 'winecfg && wineserver --wait' && \
     su -pl wine -c 'winetricks -q nocrashdialog && wineserver --wait' && \
     curl http://www.iqfeed.net/iqfeed_client_6_1_0_20.exe > $HOME/.wine/drive_c/iqfeed_install.exe && \
     su -pl wine -c "/usr/bin/xvfb-run -s -noreset -a /usr/bin/wine $HOME/.wine/drive_c/iqfeed_install.exe /S && wineserver --wait" && \
-    su -pl wine -c "wine reg add HKEY_CURRENT_USER\\\Software\\\DTN\\\IQFeed\\\Startup /t REG_DWORD /v LogLevel /d $IQFEED_LOG_LEVEL /f && wineserver --wait"
+    su -pl wine -c "wine reg add HKEY_CURRENT_USER\\\Software\\\DTN\\\IQFeed\\\Startup /t REG_DWORD /v LogLevel /d $IQFEED_LOG_LEVEL /f && wineserver --wait" && \
+    su -pl wine -c "wine reg add HKEY_CURRENT_USER\\\Software\\\DTN\\\IQFeed\\\Startup /t REG_SZ /v ShutdownDelayLastClient /d 300 /f && wineserver --wait" && \
+    su -pl wine -c "wine reg add HKEY_CURRENT_USER\\\Software\\\DTN\\\IQFeed\\\Startup /t REG_SZ /v ShutdownDelayStartup /d 300 /f && wineserver --wait"
+    
 
 # 'hack' to allow the client to listen on other interfaces
 RUN bbe -e 's/127.0.0.1/000.0.0.0/g' "$HOME/.wine/drive_c/Program Files/DTN/IQFeed/iqconnect.exe" > "$HOME/.wine/drive_c/Program Files/DTN/IQFeed/iqconnect_patched.exe"
